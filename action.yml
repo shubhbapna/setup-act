@@ -8,24 +8,24 @@ inputs:
 
 runs:
   using: "composite"
-  steps:    
+  steps:
     - name: Set up Homebrew
       uses: Homebrew/actions/setup-homebrew@master
-      
+
     - name: Install nektos/act
       shell: bash
       run: brew install act
 
     - name: Setup Act - Large image
-      if: ${{ inputs.default-runner-size == 'large' }}
+      if: inputs.default-runner-size == 'large'
       shell: bash
       run: |
         echo "-P ubuntu-latest=ghcr.io/catthehacker/ubuntu:full-latest" > ~/.actrc
         echo "-P ubuntu-20.04=ghcr.io/catthehacker/ubuntu:full-20.04" >> ~/.actrc
         echo "-P ubuntu-18.04=ghcr.io/catthehacker/ubuntu:full-18.04" >> ~/.actrc
-      
+
     - name: Setup Act - Medium image
-      if: ${{ inputs.default-runner-size == 'medium' }}
+      if: inputs.default-runner-size == 'medium'
       shell: bash
       run: |
         echo "-P ubuntu-latest=ghcr.io/catthehacker/ubuntu:act-latest" > ~/.actrc
@@ -34,15 +34,17 @@ runs:
         echo "-P ubuntu-22.04=ghcr.io/catthehacker/ubuntu:act-22.04" >> ~/.actrc
 
     - name: Setup Act - Micro image
-      if: ${{ inputs.default-runner-size == 'micro' }}
+      if: inputs.default-runner-size == 'micro'
       shell: bash
       run: |
         echo "-P ubuntu-latest=node:16-buster-slim" > ~/.actrc
         echo "-P ubuntu-20.04=node:16-buster-slim" >> ~/.actrc
         echo "-P ubuntu-18.04=node:16-buster-slim" >> ~/.actrc
         echo "-P ubuntu-22.04=node:16-bullseye-slim" >> ~/.actrc
-    
+
     - name: Incorrect default runner size
-      if: $${{ (inputs.default-runner-size != 'micro') && (inputs.default-runner-size != 'medium') && (inputs.default-runner-size != 'large') }}
+      if: (inputs.default-runner-size != 'micro') && (inputs.default-runner-size != 'medium') && (inputs.default-runner-size != 'large')
       shell: bash
-      run: exit 1
+      run: |
+        echo "Incorrect default-runner-size"
+        exit 1
