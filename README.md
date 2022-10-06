@@ -9,7 +9,7 @@ See [action.yml](action.yml)
 ```yaml
 steps:
 - uses: actions/checkout@v3
-- uses: shubhbapna/setup-act
+- uses: shubhbapna/setup-act@v1
   with:
     default-runner-size: medium
 - run: act pull_request
