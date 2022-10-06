@@ -1,5 +1,8 @@
 name: Setup nektos/act
 description: Sets up the nektos/act cli tool
+branding:
+  icon: 'play'
+  color: 'blue'
 inputs:
   default-runner-size:
     description: default runner size for act
