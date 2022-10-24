@@ -12,12 +12,16 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Set up Homebrew
-      uses: Homebrew/actions/setup-homebrew@master
-
     - name: Install nektos/act
       shell: bash
-      run: brew install act
+      run: curl https://raw.githubusercontent.com/nektos/act/master/install.sh | sudo bash
+      
+    - name: Add nektos/act to path
+      shell: bash
+      run: |
+        mkdir /opt/hostedtoolcache/act
+        mv ./bin /opt/hostedtoolcache/act/
+        echo "/opt/hostedtoolcache/act/bin/" >> $GITHUB_PATH
 
     - name: Setup Act - Large image
       if: inputs.default-runner-size == 'large'
