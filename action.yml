@@ -19,8 +19,8 @@ runs:
     - name: Add nektos/act to path
       shell: bash
       run: |
-        mkdir /opt/hostedtoolcache/act
-        mv ./bin /opt/hostedtoolcache/act/
+        sudo mkdir /opt/hostedtoolcache/act
+        sudo mv ./bin /opt/hostedtoolcache/act/
         echo "/opt/hostedtoolcache/act/bin/" >> $GITHUB_PATH
 
     - name: Setup Act - Large image
