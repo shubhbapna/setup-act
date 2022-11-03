@@ -13,10 +13,6 @@ on:
 
 jobs:
   tests:
-    strategy:
-      matrix:
-        default-runner-size: [micro, medium, large]
-      fail-fast: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -24,7 +20,14 @@ jobs:
       - name: Setup act cli
         uses: ./
         with:
-          default-runner-size: ${{ matrix.default-runner-size }}
+          default-runner-size: medium
 
-      - name: Run act
-        run: act -l
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      
+      - run: npm i
+
+      - run: npm test
+        env:
+          NODE_OPTIONS: --max_old_space_size=4096

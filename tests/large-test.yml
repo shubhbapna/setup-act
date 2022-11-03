@@ -1,0 +1,19 @@
+name: Tests
+
+on: push
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          path: large
+
+      - name: Setup act cli
+        uses: ./large
+        with:
+          default-runner-size: large
+
+      - name: Run act
+        run: cd large && act -l
