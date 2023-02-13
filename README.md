@@ -1,3 +1,8 @@
+# Deprication Notice
+
+You can now directly install `act` using [gh cli](https://github.com/nektos/act#installation-as-github-cli-extension)
+
+
 # setup-act  
 
 This action sets up the [nektos/act](https://github.com/nektos/act) cli tool  
